@@ -8,8 +8,10 @@ PROJECT_GIT_URL='https://github.com/mwjjeong/profiles-rest-api.git'
 PROJECT_BASE_PATH='/usr/local/apps/profiles-rest-api'
 
 echo "Installing dependencies..."
-apt-get update
-apt-get install -y python3-dev python3-venv sqlite python-pip supervisor nginx git
+apt-get update && apt-get upgrade -y
+apt install software-properties-common -y
+add-apt-repository ppa:deadsnakes/ppa -y
+apt-get install -y python3.10-dev python3.10-venv sqlite python3.10-pip supervisor nginx git
 
 # Create project directory
 mkdir -p $PROJECT_BASE_PATH
@@ -21,7 +23,7 @@ python3 -m venv $PROJECT_BASE_PATH/env
 
 # Install python packages
 $PROJECT_BASE_PATH/env/bin/pip install -r $PROJECT_BASE_PATH/requirements.txt
-$PROJECT_BASE_PATH/env/bin/pip install uwsgi==2.0.18
+$PROJECT_BASE_PATH/env/bin/pip install uwsgi==2.0.20
 
 # Run migrations and collectstatic
 cd $PROJECT_BASE_PATH
